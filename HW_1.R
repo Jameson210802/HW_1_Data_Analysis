@@ -6,14 +6,19 @@ sqft_val <- (kingCountyHouses$sqft)
 
 #ploting scatter plot. 
 
+## NUMBER 1 ##
 
-mean(price)
-var(price,NULL)
-median(price)
-plot(price_val)
-mean(sqft)
-var(sqft,NULL)
-median(sqft)
+summary(price_val)
+options(scipen = 999)
+boxplot(price_val,sqft_val)
+boxplot(sqft_val)
+density(price_val)
+
+hist(price_val)
+hist(sqft_val)
+summary(sqft_val)
+
+
 
 #TODO double check this 
 options(scipen = 999)
