@@ -1,34 +1,56 @@
 # HW 1
 # Jamie Anderson netid: jla656
 
-price_val <- (kingCountyHouses$price)
-sqft_val <- (kingCountyHouses$sqft)
 
-#ploting scatter plot. 
+## part a ##
 
-## NUMBER 1 ##
+## summary stats of price ##
 
-summary(price_val)
-options(scipen = 999)
-boxplot(price_val,sqft_val)
-boxplot(sqft_val)
-density(price_val)
+summary(kingCountyHouses$price)
 
-hist(price_val)
-hist(sqft_val)
-summary(sqft_val)
+options(scipen = 999) # disable scientific notation 
+
+## graphs of price ##
+
+boxplot(kingCountyHouses$price, main="Price of houses",ylab="Price")
+hist(kingCountyHouses$price,main="Histogram of Price of Houses",xlab="Price")
 
 
 
-#TODO double check this 
-options(scipen = 999)
-plot(sqft_val,price_val,xlab="sqft",ylab="price")
+## Summary stats of Sqft ##
+summary(kingCountyHouses$sqft)
+
+## graphs of Price ##
+boxplot(kingCountyHouses$sqft,main="Square feet of houses",ylab="Square feet")
+hist(kingCountyHouses$sqft,main="Histogram of square feet of houses",ylab="Square feet")
+
+plot(kingCountyHouses$sqft,kingCountyHouses$price,ylab="Price",xlab="Square feet")
 
 
-linear_reg_1 <- lm(price~sqft,data=kingCountyHouses)
-summary(linear_reg_1)
-abline(linear_reg_1, col = "red", lwd =3)
-lm()
 
-hist(price_val)
+
+## Part b ##
+
+lm(formula= kingCountyHouses$price~kingCountyHouses$sqft) # price is our response value and sqft is our explanatory variable
+
+
+
+## Part C ##
+
+logprice <- log(kingCountyHouses$price) # log defaults to calculating natural log. 
+
+lm(logprice~kingCountyHouses$sqft)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
