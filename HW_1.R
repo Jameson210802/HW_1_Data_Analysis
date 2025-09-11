@@ -31,7 +31,23 @@ plot(kingCountyHouses$sqft,kingCountyHouses$price,ylab="Price",xlab="Square feet
 
 ## Part b ##
 
-lm(formula= kingCountyHouses$price~kingCountyHouses$sqft) # price is our response value and sqft is our explanatory variable
+
+
+scatter.smooth(x=kingCountyHouses$sqft,y=kingCountyHouses$price,main="Price ~ Square feet")
+boxplot(kingCountyHouses$price,kingCountyHouses$sqft)
+
+##summary(lm(kingCountyHouses$price~kingCountyHouses$sqft))
+
+lm.model1 <- lm(formula = kingCountyHouses$price~kingCountyHouses$sqft)
+
+par(mfrow=c(2,2))
+gvlma::gvlma(lm.model1)
+plot(lm.model1)
+
+##plot(linearpricesqft.mod)
+
+
+
 
 
 
@@ -39,9 +55,21 @@ lm(formula= kingCountyHouses$price~kingCountyHouses$sqft) # price is our respons
 
 logprice <- log(kingCountyHouses$price) # log defaults to calculating natural log. 
 
-lm(logprice~kingCountyHouses$sqft)
+lm.model2 <- lm(formula = logprice~kingCountyHouses$sqft)
+
+lm.model2
 
 
+# storing coefficent and intercept from lm.model2
+
+model2_coefficients <- coef(lm.model2)
+
+intercept_model2 <- model2_coefficients["(Intercept)"]
+model2_sqft_coefficent <- model2_coefficients["kingCountyHouses$sqft"]
+
+y <- intercept_model2 + (model2_sqft_coefficent *100001)
+
+y
 
 
 
