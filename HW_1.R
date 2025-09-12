@@ -8,6 +8,7 @@ options(scipen = 999)
 ## summary stats of price ##
 
 summary(kingCountyHouses$price)
+summary(kingCountyHouses$sqft)
 
  # disable scientific notation 
 
@@ -43,7 +44,7 @@ polygon(density_sqft,col="skyblue",border="black")
 
 ## graphs of sqft ##
 boxplot(kingCountyHouses$sqft,main="Square feet of houses",ylab="Square feet")
-hist(kingCountyHouses$sqft,main="Histogram of square feet of houses",ylab="Square feet")
+hist(kingCountyHouses$sqft,main="Histogram of square feet of houses",xlab="Square feet")
 
 plot(kingCountyHouses$sqft,kingCountyHouses$price,ylab="Price",xlab="Square feet")
 
@@ -66,16 +67,22 @@ mtext(sqft_out_label,side= 1, line = 0.5)
 
 
 
-scatter.smooth(x=kingCountyHouses$sqft,y=kingCountyHouses$price,main="Price ~ Square feet",lpars = list(col = "red"))
+scatter.smooth(x=kingCountyHouses$sqft,y=kingCountyHouses$price,main="Price ~ Square feet",ylab = "Price",xlab = "square feet",lpars = list(col = "red"))
 boxplot(kingCountyHouses$price,kingCountyHouses$sqft)
 
 summary(lm(kingCountyHouses$price~kingCountyHouses$sqft))
 
 lm.model1 <- lm(formula = kingCountyHouses$price~kingCountyHouses$sqft)
 
+lm.model1
+
+summary(lm.model1)
+
+summary(lm.model1$residuals)
 par(mfrow=c(2,2))
 gvlma::gvlma(lm.model1)
 plot(lm.model1)
+
 
 
 
@@ -129,14 +136,19 @@ model3_logsqft_coefficent <- model3_coefficients["logsqft"]
 
 model3_regression_equation_1 <-intercept_model3 + (model3_logsqft_coefficent * 10000)
 model3_regression_equation_2 <-intercept_model3 + (model3_logsqft_coefficent * 10001)
+model3_regression_equation_3 <-intercept_model3 + (model3_logsqft_coefficent * (10000 * 1.01))
 lm.model3
 
 model3_regression_equation_1
 model3_regression_equation_2
+model3_regression_equation_3
 
 
 summary(lm.model3)
 
+
+lm.model4 <-lm(logsqft ~ logprice + kingCountyHouses$waterfront)
+summary(lm.model4)
 
 
 
